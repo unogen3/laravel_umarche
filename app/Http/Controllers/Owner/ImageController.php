@@ -10,6 +10,7 @@ use App\Http\Requests\UploadImageRequest;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 
+
 class ImageController extends Controller
 {
     public function __construct()
@@ -26,10 +27,10 @@ class ImageController extends Controller
                     abort(404);
                 }
             }
-            
             return $next($request);
         });
     }
+
 
     public function index()
     {
@@ -76,6 +77,7 @@ class ImageController extends Controller
         'status' => 'info']);
     }
 
+
     public function edit($id)
     {
         $image = Image::findOrFail($id);
@@ -85,7 +87,7 @@ class ImageController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'string|max:50',
+            'title' => 'string|max:50'
         ]);
 
         $image = Image::findOrFail($id);
@@ -98,6 +100,7 @@ class ImageController extends Controller
         'status' => 'info']);
     }
 
+    
     public function destroy($id)
     {
         $image = Image::findOrFail($id);

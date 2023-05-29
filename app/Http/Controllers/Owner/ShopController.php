@@ -30,14 +30,12 @@ class ShopController extends Controller
                     abort(404); // 404画面表示
                 }
             }
-            
             return $next($request);
         });
     }
 
     public function index()
     {
-        // phpinfo();
 
         //$ownerId = Auth::id();
         $shops = Shop::where('owner_id', Auth::id())->get();
@@ -49,7 +47,7 @@ class ShopController extends Controller
     public function edit($id)
     {
         $shop = Shop::findOrFail($id);
-        //dd(Shop::findOrFail($id));
+        // dd(Shop::findOrFail($id));
         return view('owner.shops.edit', compact('shop'));
     }
 
@@ -66,7 +64,7 @@ class ShopController extends Controller
             $fileNameToStore = ImageService::upload($imageFile, 'shops');
         }
 
-        $shop = shop::findOrFail($id);
+        $shop = Shop::findOrFail($id);
         $shop->name = $request->name;
         $shop->information = $request->information;
         $shop->is_selling = $request->is_selling;
@@ -80,6 +78,6 @@ class ShopController extends Controller
         ->route('owner.shops.index')
         ->with(['message' => '店舗情報を更新しました。',
         'status' => 'info']);
-    }
 
+    }
 }
