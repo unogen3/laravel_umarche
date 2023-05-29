@@ -19,17 +19,17 @@ class ImageController extends Controller
 
         $this->middleware(function ($request, $next) {
 
-            $id = $request->route()->parameter('image');
-            if(!is_null($id)){
+            $id = $request->route()->parameter('image'); 
+            if(!is_null($id)){ 
             $imagesOwnerId = Image::findOrFail($id)->owner->id;
-                $imageId = (int)$imagesOwnerId;
-                if($imageId !== Auth::id()){
+                $imageId = (int)$imagesOwnerId; 
+                if($imageId !== Auth::id()){ 
                     abort(404);
                 }
             }
             return $next($request);
         });
-    }
+    } 
 
 
     public function index()
@@ -38,7 +38,7 @@ class ImageController extends Controller
         ->orderBy('updated_at', 'desc')
         ->paginate(20);
 
-        return view('owner.images.index',
+        return view('owner.images.index', 
         compact('images'));
     }
 
@@ -63,10 +63,10 @@ class ImageController extends Controller
         $imageFiles = $request->file('files');
         if(!is_null($imageFiles)){
             foreach($imageFiles as $imageFile){
-                $fileNameToStore = ImageService::upload($imageFile, 'products');
+                $fileNameToStore = ImageService::upload($imageFile, 'products');    
                 Image::create([
                     'owner_id' => Auth::id(),
-                    'filename' => $fileNameToStore
+                    'filename' => $fileNameToStore  
                 ]);
             }
         }
@@ -77,7 +77,7 @@ class ImageController extends Controller
         'status' => 'info']);
     }
 
-
+    
     public function edit($id)
     {
         $image = Image::findOrFail($id);
@@ -100,7 +100,7 @@ class ImageController extends Controller
         'status' => 'info']);
     }
 
-    
+
     public function destroy($id)
     {
         $image = Image::findOrFail($id);
@@ -110,7 +110,7 @@ class ImageController extends Controller
             Storage::delete($filePath);
         }
 
-        Image::findOrFail($id)->delete();
+        Image::findOrFail($id)->delete(); 
 
         return redirect()
         ->route('owner.images.index')

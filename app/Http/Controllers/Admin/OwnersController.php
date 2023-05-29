@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Owner; // Eloquent エロクアント
 use App\Models\Shop;
-use Illuminate\Support\Facades\DB; // QueryBuilder クエリビルダー
+use Illuminate\Support\Facades\DB; // QueryBuilder クエリビルダ
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -14,16 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class OwnersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function __construct()
     {
         $this->middleware('auth:admin');
-    }
+    } 
 
     public function index()
     {
@@ -96,10 +90,10 @@ class OwnersController extends Controller
             throw $e;
         }
 
-            return redirect()
-            ->route('admin.owners.index')
-            ->with(['message' => 'オーナー登録を実施しました。',
-            'status' => 'info']);
+        return redirect()
+        ->route('admin.owners.index')
+        ->with(['message' => 'オーナー登録を実施しました。',
+        'status' => 'info']);
     }
 
     /**
@@ -165,11 +159,11 @@ class OwnersController extends Controller
 
     public function expiredOwnerIndex(){
         $expiredOwners = Owner::onlyTrashed()->get();
-        return view('admin.expired-owners',compact('expiredOwners'));
+        return view('admin.expired-owners', compact('expiredOwners'));
     }
-
+    
     public function expiredOwnerDestroy($id){
         Owner::onlyTrashed()->findOrFail($id)->forceDelete();
-        return redirect()->route('admin.expired-owners.index');
+        return redirect()->route('admin.expired-owners.index'); 
     }
 }

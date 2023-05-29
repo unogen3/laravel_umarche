@@ -21,11 +21,11 @@ class ProductController extends Controller
 
         $this->middleware(function ($request, $next) {
 
-            $id = $request->route()->parameter('product');
-            if(!is_null($id)){
+            $id = $request->route()->parameter('product'); 
+            if(!is_null($id)){ 
             $productsOwnerId = Product::findOrFail($id)->shop->owner->id;
-                $productId = (int)$productsOwnerId;
-                if($productId !== Auth::id()){
+                $productId = (int)$productsOwnerId; 
+                if($productId !== Auth::id()){ 
                     abort(404);
                 }
             }
