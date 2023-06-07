@@ -1,11 +1,11 @@
-## udemy Laravel口座
+## udemy Laravel講座
 
 ## インストール方法
 
 ## インストール後の実施事項
 
 画像のダミーデータは
-puvblic/imagesフォルダ内に
+public/imagesフォルダ内に
 sample1.jpg ~ sample6.jpg として
 保存しています。
 
